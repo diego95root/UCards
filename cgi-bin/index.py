@@ -12,27 +12,19 @@ form = cgi.FieldStorage()
 db_name = 'db/eng-rus.db'
 table = 'translate'
 
-html = """
+html_start = """
 <html>
 <head>
-<style>
-html {
-    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
-	font-size: 16px;
-}
-img {
-    max-width: 450px;
-    max-height:450px;
-}
-</style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <form action="index.py" name="myform" method="GET">
         Enter english:  <input type="text" name="eng"><br />
         Enter russian:  <input type="text" name="rus"><br />
         <input type="submit" value="submit">
-</form>
-</body>
+</form>"""
+
+html_end = """</body>
 </html>
 """
 
@@ -105,7 +97,7 @@ if (len(form.keys()) == 2):
 
     imgs = get_images(orig)
 
-    print html
+    print html_start, html_end
 
     for i in range(0, len(imgs["items"])):
         link = imgs["items"][i]["link"]
@@ -115,6 +107,33 @@ if (len(form.keys()) == 2):
 
 
 else:
-    print html
+    print html_start
+    url = "http://farm9.staticflickr.com/8072/8346734966_f9cd7d0941_z.jpg"
+
+    print '<ul class="slides">' # slider from https://codepen.io/AMKohn/pen/EKJHf (adopted to python)
+
+    for i in range(1, 11):
+        one = """
+        <input type="radio" name="radio-btn" id="img-{}" checked />
+        <li class="slide-container">
+    		<div class="slide">
+    			<img src="{}" />
+            </div>
+    		<div class="nav">
+    			<label for="img-{}" class="prev">&#x2039;</label>
+    			<label for="img-{}" class="next">&#x203a;</label>
+    		</div>
+        </li>
+
+        """.format(i, url, ((i+8)%10)+1, (i % 10) + 1)
+        print one
+
+    print '<li class="nav-dots">'
+    for i in range(1,11):
+        print '<label for="img-{}" class="nav-dot" id="img-dot-{}"></label>'.format(i, i)
+    print '</li>'
+
+    print '</ul>'
+    print html_end
     see_all()
     #delete_trans(table, "hello")
