@@ -15,7 +15,7 @@ table = 'translate'
 html_start = """
 <html>
 <head>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
 <form action="index.py" name="myform" method="GET">
