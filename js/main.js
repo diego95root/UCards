@@ -1,5 +1,8 @@
+var image_link = "hi";
+
 document.addEventListener("DOMContentLoaded", function(event) {
-  var image_link = document.getElementsByClassName("slide")[0].firstElementChild.src;
+  //var image_link = document.getElementsByClassName("slide")[0].firstElementChild.src;
+  console.log(image_link);
 });
 
 function add_img_link(){
@@ -14,16 +17,15 @@ function add_img_link(){
 // FIX - convert reload to ajax
 
 function send_data(){
-  var eng = document.getElementsByName('eng')[0].value;
-  var rus = document.getElementsByName('rus')[0].value;
-  var url = image_link;
-  var xhttp = new XMLHttpRequest();
-  var params = 'eng='+eng+'&rus='+rus+'&url='+url;
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      alert(eng+'&'+rus+'&'+url);
-    }
-  };
-  xhttp.open("POST", "/cgi-bin/index.py", true);
-  xhttp.send(params);
+  var eng_data = document.getElementsByName('eng')[0].value;
+  var rus_data = document.getElementsByName('rus')[0].value;
+  var url_link = image_link;
+  $.ajax({
+              url: "http://localhost:8000/cgi-bin/index.py",
+              type: "POST",
+              data: {eng: eng_data, rus: rus_data, url: url_link},
+              success: function(response){
+                      alert(eng_data+'&'+rus_data+'&'+url_link);;
+                  }
+         });
 }

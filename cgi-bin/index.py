@@ -7,6 +7,8 @@ import requests as r
 import json
 import sqlite3
 
+debug = True
+
 form = cgi.FieldStorage()
 
 db_name = 'db/eng-rus.db'
@@ -16,14 +18,15 @@ html_start = """
 <html>
 <head>
     <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/jquery.js"></script>
     <script src="../js/main.js"></script>
 </head>
 <body>
-<form action="index.py" name="myform" method="GET">
+
         Enter english:  <input type="text" name="eng"><br />
         Enter russian:  <input type="text" name="rus"><br />
-        <input type="submit" value="submit">
-</form>"""
+        <button onclick="send_data()">
+"""
 
 html_end = """</body>
 </html>
@@ -102,28 +105,37 @@ def build_slide(li):
         print '<label for="img-{}" class="nav-dot" id="img-dot-{}"></label>'.format(i, i)
     print '</li>'
 
-    print '<button>hi</button>'
+    print '<button id="button">hi</button>'
 
     print '</ul>'
+
+try:
+    d = form["eng"].value
+    d2 = form["rus"].value
+    d3 = form["url"].value
+    insert_trans(table, d, d2, d3)
+except:
+    pass
+
 
 if (len(form.keys()) == 2):
     orig = form['eng'].value
     trans = form['rus'].value
 
-    imgs = get_images(orig)
-    imgli = []
-
-    for i in range(0, len(imgs["items"])):
-        link = imgs["items"][i]["link"]
-        imgli.append(link)
-        #print '<img src="{}" alt="flash">'.format(link)
-
     print html_start
-    build_slide(imgli)
+    print "yes"
+    if debug == False:
+        imgs = get_images(orig)
+        imgli = []
+
+        for i in range(0, len(imgs["items"])):
+            link = imgs["items"][i]["link"]
+            imgli.append(link)
+            #print '<img src="{}" alt="flash">'.format(link)
+        build_slide(imgli)
     print html_end
 
     #insert_trans(table, orig, trans, link)
-
 
 else:
     print html_start
