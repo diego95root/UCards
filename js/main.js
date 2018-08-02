@@ -34,8 +34,9 @@ function google_api(){
               type: "GET",
               data: {links:'a'},
               cache: false,
-              success: function(response){ // HOW THE HELL DO I DO THIS SHIT MAN
-                      alert(response);
+              success: function(response){
+                      var json = JSON.parse(response);
+                      alert(json[1]);
                   }
          });
 }

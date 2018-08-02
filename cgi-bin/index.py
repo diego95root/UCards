@@ -85,7 +85,7 @@ def get_images(query):
     j = json.loads(jsa)
     return j
 
-def build_slide(li):
+def build_slide(li): # CONVERT TO JS INSIDE MAIN.JS
     print '<ul class="slides">' # slider from https://codepen.io/AMKohn/pen/EKJHf (adopted to python)
 
     for i in range(1, 11):
@@ -114,11 +114,19 @@ def build_slide(li):
 
 # HANDLE GET AJAX - INSERT DATA
 
+def handle_ajax(term):
+    imgs = get_images(term)
+    img_list = []
+    for i in range(0, len(imgs["items"])):
+        link = imgs["items"][i]["link"]
+        img_list.append(link)
+    return json.dumps(img_list)
+
 try:
     form["links"].value
-    print "Content-Type: text/html" # MODIFY TO SEND JSON DATA AND THEN DESERIALIZE IN JS AND ADD TO DOM
+    print "Content-Type: json" # MODIFY TO SEND JSON DATA AND THEN DESERIALIZE IN JS AND ADD TO DOM
     print
-    print "RESPONSE"
+    print handle_ajax("apple")
     GET_req = 1
 except:
     pass
