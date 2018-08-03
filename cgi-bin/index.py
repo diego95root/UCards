@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-# save as cgi-bin/index.py
-# Python 2.7
+# - *- coding: utf- 8 - *-
+
 import cgi
 import cgitb; cgitb.enable()
 import requests as r
@@ -12,6 +12,15 @@ GET_req = 0
 
 form = cgi.FieldStorage()
 
+languages_available = {
+    "eng" : u"Enter the word in English",
+    "spa" : u"Introduce la palabra en Español",
+    "fre" : u"Introduissez le mot en Français",
+    "rus" : u"Введите слово на русском языке" #surely not accurate
+}
+
+selected_lang = 'eng-rus'
+
 db_name = 'db/eng-rus.db'
 table = 'translate'
 
@@ -19,17 +28,18 @@ html_start = """
 <html>
 <head>
     <link rel="stylesheet" href="../css/main.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="../js/jquery.js"></script>
     <script src="../js/main.js"></script>
 </head>
 <body>
-<div>
-        <div>Enter english:  <input type="text" name="eng"><br /></div>
-        <div>Enter russian:  <input type="text" name="rus"><br /></div>
-        <button onclick="send_data()">hi</button>
+<div id="main">
+        <input class="input" type="text" name="eng" placeholder="{}"><br />
+        <input class="input" type="text" name="rus" placeholder="{}"><br />
+        <button id="sender" onclick="send_data()">hi</button>
 </div>
 <button onclick="google_api()">GET request</button>
-"""
+""".format(languages_available[selected_lang.split('-')[0]], languages_available[selected_lang.split('-')[1]].encode('utf-8'))
 
 html_end = """</body>
 </html>
@@ -70,7 +80,7 @@ def see_all():
     db.commit()
     db.close()
 
-def get_images(query):
+def get_images(query): # CHECK IF IT'S POSSIBLE TO SEARCH AGAIN IF 403
     url = 'https://www.googleapis.com/customsearch/v1'
     json_dict = json.load(open("creds/data.json"))
     """
@@ -126,7 +136,7 @@ try:
     form["links"].value
     print "Content-Type: text/html" # MODIFY TO SEND JSON DATA AND THEN DESERIALIZE IN JS AND ADD TO DOM
     print
-    print handle_ajax("pokemon")
+    print "[1,2,3,4,5,6,7,8,9,10]"
     GET_req = 1
 except:
     pass

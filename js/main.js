@@ -31,7 +31,8 @@ function send_data(){
 function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (adopted to js, loaded dynamically)
   var ul = document.createElement("ul");
   ul.setAttribute("class", "slides");
-  document.body.appendChild(ul);
+  var sender = document.getElementById("sender");
+  document.getElementById("main").insertBefore(ul, sender);
   for (var i=1; i!=11; i++){
     var input = document.createElement("input");
     input.setAttribute("type", "radio");
@@ -85,9 +86,8 @@ function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (
   var but = document.createElement("button"); //<li class="nav-dots">
   but.setAttribute("id", "button");
   but.appendChild( document.createTextNode("Use?"));
-  document.body.appendChild(but);
+  document.getElementById("main").insertBefore(but, sender);
   //<button id="button">use?</button>
-
 }
 
 function google_api(){
