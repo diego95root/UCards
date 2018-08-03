@@ -28,6 +28,68 @@ function send_data(){
 // Use ajax get to include the images once the translation terms have been set
 // It should build the slide here
 
+function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (adopted to js, loaded dynamically)
+  var ul = document.createElement("ul");
+  ul.setAttribute("class", "slides");
+  document.body.appendChild(ul);
+  for (var i=1; i!=11; i++){
+    var input = document.createElement("input");
+    input.setAttribute("type", "radio");
+    input.setAttribute("name", "radio-btn");
+    input.setAttribute("id", "img-" + String(i));
+    input.setAttribute("checked", "checked");
+    ul.appendChild(input); //<input type="radio" name="radio-btn" id="img-{}" checked />
+
+    var li = document.createElement("li"); //<li class="slide-container">
+    li.setAttribute("class", "slide-container");
+    ul.appendChild(li);
+
+    var div = document.createElement("div"); //<div class="slide">
+    div.setAttribute("class", "slide");
+    li.append(div);
+
+    console.log(array[i-1]);
+    var img = document.createElement("img"); //<img src="{}" />
+    img.setAttribute("src", array[i-1]);
+    div.append(img);
+
+    var div2 = document.createElement("div"); //<div class="nav">
+    div2.setAttribute("class", "nav");
+    li.append(div2);
+
+    var lab1 = document.createElement("label"); //<label for="img-{}" class="prev">&#x2039;</label>
+    lab1.setAttribute("for", "img-"+String(((i+8)%10)+1));
+    lab1.setAttribute("class", "prev");
+    lab1.innerHTML = "&#x2039;";
+    div2.append(lab1);
+
+    var lab2 = document.createElement("label"); //<label for="img-{}" class="next">&#x203a;</label>
+    lab2.setAttribute("for", "img-"+String((i % 10) + 1));
+    lab2.setAttribute("class", "next");
+    lab2.innerHTML = "&#x203a;";
+    div2.append(lab2);
+  }
+
+  var li2 = document.createElement("li"); //<li class="nav-dots">
+  li2.setAttribute("class", "nav-dots");
+  ul.appendChild(li2);
+
+  for (var i=1; i!=11; i++){
+    var labeldot = document.createElement("label"); //<label for="img-{}" class="nav-dot" id="img-dot-{}"></label>'.format(i, i)
+    labeldot.setAttribute("for", "img-"+String(i));
+    labeldot.setAttribute("class", "nav-dot");
+    labeldot.setAttribute("id", "img-dot-"+String(i));
+    li2.append(labeldot);
+  }
+
+  var but = document.createElement("button"); //<li class="nav-dots">
+  but.setAttribute("id", "button");
+  but.appendChild( document.createTextNode("Use?"));
+  document.body.appendChild(but);
+  //<button id="button">use?</button>
+
+}
+
 function google_api(){
   $.ajax({
               url: "http://localhost:8000/cgi-bin/index.py",
@@ -35,8 +97,8 @@ function google_api(){
               data: {links:'a'},
               cache: false,
               success: function(response){
-                      var json = JSON.parse(response);
-                      alert(json[1]);
+                      build_slide(JSON.parse(response));
+                      //alert(response);
                   }
          });
 }

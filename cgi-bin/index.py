@@ -124,9 +124,9 @@ def handle_ajax(term):
 
 try:
     form["links"].value
-    print "Content-Type: json" # MODIFY TO SEND JSON DATA AND THEN DESERIALIZE IN JS AND ADD TO DOM
+    print "Content-Type: text/html" # MODIFY TO SEND JSON DATA AND THEN DESERIALIZE IN JS AND ADD TO DOM
     print
-    print handle_ajax("apple")
+    print handle_ajax("pokemon")
     GET_req = 1
 except:
     pass
