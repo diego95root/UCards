@@ -1,10 +1,3 @@
-var image_link = "hi";
-
-document.addEventListener("DOMContentLoaded", function(event) {
-  //var image_link = document.getElementsByClassName("slide")[0].firstElementChild.src;
-  console.log(image_link);
-});
-
 function add_img_link(){
   for (var i=0; i!=document.getElementsByClassName("slide").length; i++){
     if (window.getComputedStyle(document.getElementsByClassName("slide")[i]).getPropertyValue('opacity') !== "0"){
@@ -85,6 +78,7 @@ function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (
 
   var but = document.createElement("button"); //<li class="nav-dots">
   but.setAttribute("id", "button");
+  but.setAttribute("onclick", "add_img_link()");
   but.appendChild( document.createTextNode("Use?"));
   document.getElementById("main").insertBefore(but, sender);
   //<button id="button">use?</button>
@@ -94,10 +88,12 @@ function google_api(){
   $.ajax({
               url: "http://localhost:8000/cgi-bin/index.py",
               type: "GET",
-              data: {links:'a'},
+              data: {links:document.getElementsByName('eng')[0].value},
               cache: false,
               success: function(response){
-                      build_slide(JSON.parse(response));
+                      build_slide(response);
+                      //build_slide(JSON.parse(response));
+                      //var image_link = document.getElementsByClassName("slide")[0].firstElementChild.src;
                       //alert(response);
                   }
          });
