@@ -10,7 +10,7 @@ function add_img_link(){
 function send_data(){
   var eng_data = document.getElementsByName('eng')[0].value;
   var rus_data = document.getElementsByName('rus')[0].value;
-  var url_link = image_link;
+  var url_link = "image_link"; //image_link;
   $.ajax({
               url: "http://localhost:8000/cgi-bin/index.py",
               type: "POST",
