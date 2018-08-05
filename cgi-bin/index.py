@@ -7,7 +7,7 @@ import requests as r
 import json
 import sys
 
-sys.path.insert(0, '/Users/diego/desktop/Python_cgi/cgi-bin')
+sys.path.append('cgi-bin')
 
 from my_functions import *
 
