@@ -1,8 +1,36 @@
+var out = 0;
+var inn = 0;
+var slide_built = 0;
+
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('first-input').addEventListener('focusout', function(){out = 1; api_caller()});
+  document.getElementById('first-input').addEventListener('focus', function(){inn = 1; api_caller()});
+  document.getElementById('second-input').addEventListener('focusout', function(){out = 1; api_caller()});
+  document.getElementById('second-input').addEventListener('focus', function(){inn = 1; api_caller()});
+});
+
+function api_caller(){
+  if (out == 1 && inn == 1 && !slide_built){
+    slide_built = 1;
+    google_api()
+  }
+}
+
 function add_img_link(){
   for (var i=0; i!=document.getElementsByClassName("slide").length; i++){
     if (window.getComputedStyle(document.getElementsByClassName("slide")[i]).getPropertyValue('opacity') !== "0"){
       var elt = document.getElementsByClassName("slide")[i];
       image_link = elt.firstElementChild.src;
+      document.getElementById("saved").style.visibility = "visible";
+      document.getElementById("saved").style.opacity = "1";
+      document.getElementById("overlay-back").style.visibility = "visible";
+      document.getElementById("overlay-back").style.opacity = "0.6";
+      setTimeout(function(){
+        document.getElementById("saved").style.opacity = "0";
+        document.getElementById("overlay-back").style.visibility = "hidden";
+        document.getElementById("overlay-back").style.opacity = "0";
+        document.getElementById("saved").style.visibility = "hidden";
+      },580);
     };
   }
 }
@@ -79,7 +107,7 @@ function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (
   var but = document.createElement("button"); //<li class="nav-dots">
   but.setAttribute("id", "button");
   but.setAttribute("onclick", "add_img_link()");
-  but.appendChild( document.createTextNode("Use?"));
+  but.appendChild( document.createTextNode("Set flashcard image"));
   document.getElementById("main").insertBefore(but, sender);
   //<button id="button">use?</button>
 }
@@ -98,7 +126,6 @@ function google_api(){
                   }
          });
 }
-
 
 // Try to use native js to implement ajax calls - FIX
 
