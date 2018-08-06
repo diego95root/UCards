@@ -41,7 +41,7 @@ html_start = """
             <input class="input" id="second-input" type="text" name="rus" placeholder="{}"><br />
             <button id="sender" onclick="send_data()">Create Flashcard</button>
     </div>
-    <button onclick="google_api()">GET request</button>
+    <button onclick="api_caller()">GET request</button>
     """.format(languages_available[selected_lang.split('-')[0]].encode('utf-8'), languages_available[selected_lang.split('-')[1]].encode('utf-8'))
 
 html_end = """

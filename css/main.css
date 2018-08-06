@@ -34,8 +34,8 @@ img {
   margin-top: 30px;
 }
 
-#button, .input, #sender {
-  padding: 5px;
+.button, .input, #sender {
+  padding: 10px;
   display: block;
   margin: 0 auto;
   position: relative;
@@ -47,20 +47,31 @@ img {
   border-radius: 3px;
   border: 2px solid #008B8B;
   color: #2F4F4F;
-  transition: all .2s ease-in-out;
+  transition: color .2s ease-in-out, background-color .2s ease-in-out, cursor .2s ease-in-out, opacity 1.5s ease-in-out;
 }
 
-#button:hover, #sender:hover {
+.button:hover, #sender:hover {
   background-color: #40E0D0;
   color: black;
   cursor:pointer;
 }
 
+.button {
+  opacity:0;
+  width: 290;
+  margin: 16px;
+  display: inline-block;
+}
+
+.button-visible {
+  opacity:1;
+}
+
 .input {
   text-align: center;
   width:609px;
-  height: 70px;
-  font-size: 29px;
+  height: 60px;
+  font-size: 25px;
 }
 
 .input::placeholder {
@@ -107,12 +118,19 @@ img {
 .slides {
     padding: 0;
     width: 609px;
-    height: 420px;
+    height: 0px;
     display: block;
     margin: 0 auto;
     position: relative;
     border: 2px solid #008B8B;
     border-radius: 3px;
+    opacity:0;
+    transition: height 1s ease, opacity 2s linear;
+}
+
+.slides-visible {
+  opacity:1;
+  height: 420px;
 }
 
 .slides * {

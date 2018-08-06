@@ -10,9 +10,14 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function api_caller(){
-  if (out == 1 && inn == 1 && !slide_built){
+  if (document.getElementsByName('eng')[0].value == ""){
+      out = 0;
+      inn = 0;
+      return 0;
+  }
+  if (out == 1 && inn == 1 && !(slide_built)){
     slide_built = 1;
-    google_api()
+    google_api();
   }
 }
 
@@ -54,6 +59,9 @@ function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (
   ul.setAttribute("class", "slides");
   var sender = document.getElementById("sender");
   document.getElementById("main").insertBefore(ul, sender);
+  setTimeout(function(){
+    document.getElementsByClassName('slides')[0].className += ' slides-visible';
+  }, 0);
   for (var i=1; i!=11; i++){
     var input = document.createElement("input");
     input.setAttribute("type", "radio");
@@ -70,7 +78,6 @@ function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (
     div.setAttribute("class", "slide");
     li.append(div);
 
-    console.log(array[i-1]);
     var img = document.createElement("img"); //<img src="{}" />
     img.setAttribute("src", array[i-1]);
     div.append(img);
@@ -105,10 +112,19 @@ function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (
   }
 
   var but = document.createElement("button"); //<li class="nav-dots">
-  but.setAttribute("id", "button");
+  but.setAttribute("class", "button");
   but.setAttribute("onclick", "add_img_link()");
   but.appendChild( document.createTextNode("Set flashcard image"));
   document.getElementById("main").insertBefore(but, sender);
+  var but2 = document.createElement("button"); //<li class="nav-dots">
+  but2.setAttribute("class", "button");
+  but2.setAttribute("onclick", "add_img_link()");
+  but2.appendChild( document.createTextNode("Search again"));
+  document.getElementById("main").insertBefore(but2, sender);
+  setTimeout(function(){
+    document.getElementsByClassName('button')[0].className += ' button-visible';
+    document.getElementsByClassName('button')[1].className += ' button-visible';
+  }, 0);
   //<button id="button">use?</button>
 }
 
