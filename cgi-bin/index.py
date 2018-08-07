@@ -35,13 +35,12 @@ html_start = """
     </head>
     <body>
     <div id="overlay-back"></div>
-    <div id="saved">Flashcard image set</div>
+    <div id="saved"></div>
     <div id="main">
             <input class="input" id="first-input" type="text" name="eng" placeholder="{}"><br />
             <input class="input" id="second-input" type="text" name="rus" placeholder="{}"><br />
             <button id="sender" onclick="send_data()">Create Flashcard</button>
     </div>
-    <button onclick="api_caller()">GET request</button>
     """.format(languages_available[selected_lang.split('-')[0]].encode('utf-8'), languages_available[selected_lang.split('-')[1]].encode('utf-8'))
 
 html_end = """

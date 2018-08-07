@@ -9,6 +9,22 @@ document.addEventListener('DOMContentLoaded', function(){
   document.getElementById('second-input').addEventListener('focus', function(){inn = 1; api_caller()});
 });
 
+function display_msg(text){
+  var elt = document.getElementById("saved");
+  var overlay = document.getElementById("overlay-back");
+  elt.innerHTML = text;
+  elt.style.visibility = "visible";
+  elt.style.opacity = "1";
+  overlay.style.visibility = "visible";
+  overlay.style.opacity = "0.6";
+  setTimeout(function(){
+    elt.style.opacity = "0";
+    overlay.style.visibility = "hidden";
+    overlay.style.opacity = "0";
+    elt.style.visibility = "hidden";
+  },580);
+}
+
 function api_caller(){
   if (document.getElementsByName('eng')[0].value == ""){
       out = 0;
@@ -17,7 +33,7 @@ function api_caller(){
   }
   if (out == 1 && inn == 1 && !(slide_built)){
     slide_built = 1;
-    google_api();
+    google_api(0);
   }
 }
 
@@ -26,16 +42,7 @@ function add_img_link(){
     if (window.getComputedStyle(document.getElementsByClassName("slide")[i]).getPropertyValue('opacity') !== "0"){
       var elt = document.getElementsByClassName("slide")[i];
       image_link = elt.firstElementChild.src;
-      document.getElementById("saved").style.visibility = "visible";
-      document.getElementById("saved").style.opacity = "1";
-      document.getElementById("overlay-back").style.visibility = "visible";
-      document.getElementById("overlay-back").style.opacity = "0.6";
-      setTimeout(function(){
-        document.getElementById("saved").style.opacity = "0";
-        document.getElementById("overlay-back").style.visibility = "hidden";
-        document.getElementById("overlay-back").style.opacity = "0";
-        document.getElementById("saved").style.visibility = "hidden";
-      },580);
+      display_msg("Flashcard image set");
     };
   }
 }
@@ -80,6 +87,7 @@ function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (
 
     var img = document.createElement("img"); //<img src="{}" />
     img.setAttribute("src", array[i-1]);
+    img.setAttribute("class", "slide_img");
     div.append(img);
 
     var div2 = document.createElement("div"); //<div class="nav">
@@ -118,27 +126,38 @@ function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (
   document.getElementById("main").insertBefore(but, sender);
   var but2 = document.createElement("button"); //<li class="nav-dots">
   but2.setAttribute("class", "button");
-  but2.setAttribute("onclick", "add_img_link()");
+  but2.setAttribute("onclick", "google_api(1)");
   but2.appendChild( document.createTextNode("Search again"));
   document.getElementById("main").insertBefore(but2, sender);
   setTimeout(function(){
-    document.getElementsByClassName('button')[0].className += ' button-visible';
-    document.getElementsByClassName('button')[1].className += ' button-visible';
+    x = document.getElementsByClassName('button');
+    for (var i = 0; i < x.length; i++) x[i].className += ' button-visible';
   }, 0);
   //<button id="button">use?</button>
 }
 
-function google_api(){
+function replace_slide(array){
+  x = document.getElementsByClassName('slide_img');
+  display_msg("Images replaced");
+  for (var i = 0; i < x.length; i++) x[i].src = array[i];
+}
+
+function google_api(id){
   $.ajax({
               url: "http://localhost:8000/cgi-bin/index.py",
               type: "GET",
               data: {links:document.getElementsByName('eng')[0].value},
               cache: false,
               success: function(response){
-                      build_slide(response);
-                      //build_slide(JSON.parse(response));
-                      //var image_link = document.getElementsByClassName("slide")[0].firstElementChild.src;
-                      //alert(response);
+                      if (id == 0){
+                        build_slide(response);
+                        //build_slide(JSON.parse(response));
+                        //var image_link = document.getElementsByClassName("slide")[0].firstElementChild.src;
+                        //alert(response);
+                      }
+                      else {
+                        replace_slide(response);
+                      }
                   }
          });
 }
