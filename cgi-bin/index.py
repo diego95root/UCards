@@ -66,7 +66,10 @@ elif form.has_key("action"):
         print
         print json.dumps(lang) #handle_ajax(data)
     elif data == "study":
-        pass
+        data = json.dumps(see_all(db_name))
+        print "Content-Type: json/text"
+        print
+        print data
 
 elif form.has_key("eng") and form.has_key("rus") and form.has_key("url"): # HANDLE POST AJAX - INSERT DATA
     d = form["eng"].value

@@ -33,10 +33,15 @@ def see_all(db_name):
     cursor = db.cursor()
     cursor.execute(query)
     rows = cursor.fetchall()
+
+    data = []
+
     for row in rows:
-        print "{} : {} -- {}".format(row[0], row[1], row[2])
+        #print "{} : {} -- {}".format(row[0].encode('utf-8'), row[1].encode('utf-8'), row[2].encode('utf-8'))
+        data.append([row[0], row[1], row[2]])
     db.commit()
     db.close()
+    return data
 
 def get_images(query): # CHECK IF IT'S POSSIBLE TO SEARCH AGAIN IF 403
     url = 'https://www.googleapis.com/customsearch/v1'

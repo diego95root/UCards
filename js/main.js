@@ -198,7 +198,20 @@ function manage_view(act){
                         document.getElementById('second-input').addEventListener('focus', function(){inn = 1; api_caller()});
                       }
                       else if (act==="study"){
-                        console.log(2);
+                        console.log(response);
+                        var main = document.createElement("div");
+                        main.setAttribute("id", "main");
+                        document.body.appendChild(main);
+
+                        var p = document.createElement("p");
+                        p.setAttribute("class", "trans");
+                        p.innerHTML = "text";
+                        main.appendChild(p);
+
+                        var img = document.createElement("img");
+                        img.setAttribute("class", "study_img");
+                        main.appendChild(img);
+                        main.appendChild(p);
                       }
                       closeNav();
                   }
