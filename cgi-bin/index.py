@@ -36,6 +36,17 @@ html_start = """
     <body>
     <div id="overlay-back"></div>
     <div id="saved"></div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div id="refs">
+            <a href="javascript:manage_view('create')">Create flashcard</a>
+            <hr>
+            <a href="javascript:manage_view('study')">Study flashcards</a>
+        </div>
+    </div>
+
+    <!-- Use any element to open the sidenav -->
+    <span onclick="openNav()">open</span>
     <div id="main">
             <input class="input" id="first-input" type="text" name="eng" placeholder="{}"><br />
             <input class="input" id="second-input" type="text" name="rus" placeholder="{}"><br />
@@ -52,6 +63,12 @@ if form.has_key("links"):
     print "Content-Type: text/html" # MODIFY TO SEND JSON DATA AND THEN DESERIALIZE IN JS AND ADD TO DOM
     print
     print "1,2,3,4,5,6,7,8,9,10" #handle_ajax(data)
+
+elif form.has_key("create"):
+    pass
+
+elif form.has_key("study"):
+    pass
 
 elif form.has_key("eng") and form.has_key("rus") and form.has_key("url"): # HANDLE POST AJAX - INSERT DATA
     d = form["eng"].value

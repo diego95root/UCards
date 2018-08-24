@@ -162,6 +162,18 @@ function google_api(id){
          });
 }
 
+function manage_view(act){
+  $.ajax({
+              url: "http://localhost:8000/cgi-bin/index.py",
+              type: "GET",
+              data: {action:act},
+              cache: false,
+              success: function(response){
+                      closeNav();
+                  }
+         });
+}
+
 // Try to use native js to implement ajax calls - FIX
 
 function send_data2(){
@@ -176,4 +188,12 @@ function send_data2(){
   };
   xhttp.open('POST', 'http://localhost:8000/cgi-bin/index.py', true);
   xhttp.send(JSON.stringify({eng: eng_data, rus: rus_data, url: url_link}));
+}
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "100%";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
 }
