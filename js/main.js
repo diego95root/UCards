@@ -19,7 +19,7 @@ function display_msg(text){
 }
 
 function api_caller(){
-  if (document.getElementsByName('eng')[0].value == ""){
+  if (document.getElementsByName('eng')[0].value === "" && document.getElementsByName('rus')[0].value === ""){
       out = 0;
       inn = 0;
       return 0;
