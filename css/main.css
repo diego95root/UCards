@@ -35,6 +35,10 @@ img {
   margin-top: 20px;
 }
 
+#menu_toggle {
+  position:absolute;
+}
+
 .button, .input, #sender {
   padding: 10px;
   display: block;

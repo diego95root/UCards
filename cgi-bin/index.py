@@ -45,12 +45,7 @@ html_start = """
         </div>
     </div>
 
-    <span onclick="openNav()">open</span>
-    <div id="main">
-            <input class="input" id="first-input" type="text" name="eng" placeholder="{}"><br />
-            <input class="input" id="second-input" type="text" name="rus" placeholder="{}"><br />
-            <button id="sender" onclick="send_data()">Create Flashcard</button>
-    </div>
+    <span id="menu_toggle" onclick="openNav()">open</span>
     """
 
 html_end = """
