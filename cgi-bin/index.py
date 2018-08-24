@@ -78,5 +78,8 @@ elif form.has_key("eng") and form.has_key("rus") and form.has_key("url"): # HAND
     insert_trans(db_name, table, d, d2, d3)
 
 else:
+    print "Content-Type: text/html"
+    print "Cache-control: no-cache"
+    print
     print html_start
     print html_end

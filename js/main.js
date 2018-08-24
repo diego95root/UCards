@@ -129,6 +129,13 @@ function build_slide(array){ //slider from https://codepen.io/AMKohn/pen/EKJHf (
   //<button id="button">use?</button>
 }
 
+function create_main(){
+  try { document.body.removeChild(document.getElementById("main"))} catch {}
+  var main = document.createElement("div");
+  main.setAttribute("id", "main");
+  document.body.appendChild(main);
+}
+
 function replace_slide(array){
   x = document.getElementsByClassName('slide_img');
   display_msg("Images replaced");
@@ -164,9 +171,7 @@ function manage_view(act){
               success: function(response){
                       if (act==="create"){
                         lang = JSON.parse(response);
-                        var main = document.createElement("div");
-                        main.setAttribute("id", "main");
-                        document.body.appendChild(main);
+                        create_main();
 
                         var inp1 = document.createElement("input");
                         inp1.setAttribute("class", "input");
@@ -199,9 +204,7 @@ function manage_view(act){
                       }
                       else if (act==="study"){
                         console.log(response);
-                        var main = document.createElement("div");
-                        main.setAttribute("id", "main");
-                        document.body.appendChild(main);
+                        create_main();
 
                         var p = document.createElement("p");
                         p.setAttribute("class", "trans");
@@ -211,7 +214,7 @@ function manage_view(act){
                         var img = document.createElement("img");
                         img.setAttribute("class", "study_img");
                         main.appendChild(img);
-                        main.appendChild(p);
+                        main.appendChild(p.cloneNode(true));
                       }
                       closeNav();
                   }
