@@ -2,13 +2,6 @@ var out = 0;
 var inn = 0;
 var slide_built = 0;
 
-document.addEventListener('DOMContentLoaded', function(){
-  document.getElementById('first-input').addEventListener('focusout', function(){out = 1; api_caller()});
-  document.getElementById('first-input').addEventListener('focus', function(){inn = 1; api_caller()});
-  document.getElementById('second-input').addEventListener('focusout', function(){out = 1; api_caller()});
-  document.getElementById('second-input').addEventListener('focus', function(){inn = 1; api_caller()});
-});
-
 function display_msg(text){
   var elt = document.getElementById("saved");
   var overlay = document.getElementById("overlay-back");
@@ -169,6 +162,44 @@ function manage_view(act){
               data: {action:act},
               cache: false,
               success: function(response){
+                      if (act==="create"){
+                        lang = JSON.parse(response);
+                        var main = document.createElement("div");
+                        main.setAttribute("id", "main");
+                        document.body.appendChild(main);
+
+                        var inp1 = document.createElement("input");
+                        inp1.setAttribute("class", "input");
+                        inp1.setAttribute("id", "first-input");
+                        inp1.setAttribute("type", "text");
+                        inp1.setAttribute("name", "eng");
+                        inp1.setAttribute("placeholder", lang[0]);
+                        main.appendChild(inp1);
+                        main.appendChild(document.createElement("br"));
+
+                        var inp2 = document.createElement("input");
+                        inp2.setAttribute("class", "input");
+                        inp2.setAttribute("id", "second-input");
+                        inp2.setAttribute("type", "text");
+                        inp2.setAttribute("name", "rus");
+                        inp2.setAttribute("placeholder", lang[1]);
+                        main.appendChild(inp2);
+                        main.appendChild(document.createElement("br"));
+
+                        var button = document.createElement("button");
+                        button.setAttribute("id", "sender");
+                        button.setAttribute("onclick", "send_data()");
+                        button.appendChild( document.createTextNode("Create Flashcard"));
+                        main.appendChild(button);
+
+                        document.getElementById('first-input').addEventListener('focusout', function(){out = 1; api_caller()});
+                        document.getElementById('first-input').addEventListener('focus', function(){inn = 1; api_caller()});
+                        document.getElementById('second-input').addEventListener('focusout', function(){out = 1; api_caller()});
+                        document.getElementById('second-input').addEventListener('focus', function(){inn = 1; api_caller()});
+                      }
+                      else if (act==="study"){
+                        console.log(2);
+                      }
                       closeNav();
                   }
          });

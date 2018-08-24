@@ -45,14 +45,13 @@ html_start = """
         </div>
     </div>
 
-    <!-- Use any element to open the sidenav -->
     <span onclick="openNav()">open</span>
     <div id="main">
             <input class="input" id="first-input" type="text" name="eng" placeholder="{}"><br />
             <input class="input" id="second-input" type="text" name="rus" placeholder="{}"><br />
             <button id="sender" onclick="send_data()">Create Flashcard</button>
     </div>
-    """.format(languages_available[selected_lang.split('-')[0]].encode('utf-8'), languages_available[selected_lang.split('-')[1]].encode('utf-8'))
+    """
 
 html_end = """
     </body>
@@ -64,11 +63,15 @@ if form.has_key("links"):
     print
     print "1,2,3,4,5,6,7,8,9,10" #handle_ajax(data)
 
-elif form.has_key("create"):
-    pass
-
-elif form.has_key("study"):
-    pass
+elif form.has_key("action"):
+    data = form["action"].value
+    if data == "create":
+        lang = [languages_available[selected_lang.split('-')[0]].encode('utf-8'), languages_available[selected_lang.split('-')[1]].encode('utf-8')]
+        print "Content-Type: text/html"
+        print
+        print json.dumps(lang) #handle_ajax(data)
+    elif data == "study":
+        pass
 
 elif form.has_key("eng") and form.has_key("rus") and form.has_key("url"): # HANDLE POST AJAX - INSERT DATA
     d = form["eng"].value
