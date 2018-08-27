@@ -3,7 +3,6 @@
 
 import cgi
 import cgitb; cgitb.enable()
-import requests as r
 import json
 import sys
 
@@ -56,7 +55,7 @@ if form.has_key("links"):
     data = form["links"].value
     print "Content-Type: text/html" # MODIFY TO SEND JSON DATA AND THEN DESERIALIZE IN JS AND ADD TO DOM
     print
-    print "1,2,3,4,5,6,7,8,9,10" #handle_ajax(data)
+    print handle_ajax(data) #"1,2,3,4,5,6,7,8,9,10"
 
 elif form.has_key("action"):
     data = form["action"].value

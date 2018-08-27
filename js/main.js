@@ -3,6 +3,7 @@ var inn = 0;
 var slide_built = 0;
 var data = [];
 var data_count = 1;
+var image_link = "link";
 
 function display_msg(text){
   var elt = document.getElementById("saved");
@@ -45,11 +46,14 @@ function add_img_link(){
 function send_data(){
   var eng_data = document.getElementsByName('eng')[0].value;
   var rus_data = document.getElementsByName('rus')[0].value;
-  var url_link = "image_link"; //image_link;
+  var url_link = image_link;
   $.ajax({
               url: "http://localhost:8000/cgi-bin/index.py",
               type: "POST",
-              data: {eng: eng_data, rus: rus_data, url: url_link}
+              data: {eng: eng_data, rus: rus_data, url: url_link},
+              success: function(response){
+                display_msg("Flashcard added!");
+              }
          });
 }
 
@@ -152,9 +156,9 @@ function google_api(id){
               cache: false,
               success: function(response){
                       if (id == 0){
-                        build_slide(response);
-                        //build_slide(JSON.parse(response));
-                        //var image_link = document.getElementsByClassName("slide")[0].firstElementChild.src;
+                        //build_slide(response); // DEBUG MODE
+                        build_slide(JSON.parse(response)); //PRODUCTION MODE
+                        var image_link = document.getElementsByClassName("slide")[0].firstElementChild.src;
                         //alert(response);
                       }
                       else {
@@ -255,7 +259,7 @@ $(document).keypress(function (e) {
     if (e.which == 13) {
       var text1 = document.getElementsByClassName('trans')[0];
       var text2 = document.getElementsByClassName('back trans')[0];
-      flip(1);
+      if (document.getElementsByClassName('card')[0].className.indexOf('flipped')!==-1){flip(1)}
       var url = document.getElementsByClassName('study_img')[0];
       url.src = data[data_count][2];
       text1.innerHTML = data[data_count][0];

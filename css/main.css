@@ -51,7 +51,7 @@ img {
 .study_img {
   border: 2px solid #008B8B;
   width:auto;
-  height:100%;
+  height:auto;
   max-width:609px;
   max-height:420px;
   border-radius: 3px;

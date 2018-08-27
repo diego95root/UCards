@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # - *- coding: utf- 8 - *-
 
+import json
 import sqlite3
+import requests as r
+
 
 def create_table(db_name):
     db = sqlite3.connect(db_name)
