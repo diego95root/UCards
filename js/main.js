@@ -1,6 +1,8 @@
 var out = 0;
 var inn = 0;
 var slide_built = 0;
+var data = [];
+var data_count = 1;
 
 function display_msg(text){
   var elt = document.getElementById("saved");
@@ -203,23 +205,63 @@ function manage_view(act){
                         document.getElementById('second-input').addEventListener('focus', function(){inn = 1; api_caller()});
                       }
                       else if (act==="study"){
-                        console.log(response);
+                        data = response;
                         create_main();
 
-                        var p = document.createElement("p");
+                        var p = document.createElement("div");
                         p.setAttribute("class", "trans");
-                        p.innerHTML = "text";
+                        p.innerHTML = response[0][0];
                         main.appendChild(p);
 
                         var img = document.createElement("img");
                         img.setAttribute("class", "study_img");
+                        img.setAttribute("src", response[0][2]);
                         main.appendChild(img);
-                        main.appendChild(p.cloneNode(true));
+
+                        // START CREATION OF CARD TO BE FLIPPED
+
+                        var section = document.createElement("div");
+                        section.setAttribute("class", "container");
+                        main.appendChild(section);
+
+                        var p2 = document.createElement("div");
+                        p2.setAttribute("class", "card");
+                        p2.setAttribute("onclick", "flip(0)");
+                        section.appendChild(p2);
+
+                        var pp_front = document.createElement("div");
+                        pp_front.setAttribute("class", "front trans");
+                        pp_front.innerHTML = "Guess the translation!";
+                        p2.appendChild(pp_front);
+
+                        var p_back = document.createElement("div");
+                        p_back.setAttribute("class", "back trans");
+                        p_back.innerHTML = response[0][1];
+                        p2.appendChild(p_back);
                       }
                       closeNav();
                   }
          });
 }
+
+function flip(check) {
+    if (check === 1){
+      $('.card').toggleClass('flipped')
+    }
+    else {document.getElementsByClassName('card')[0].className += ' flipped'}
+}
+
+$(document).keypress(function (e) {
+    if (e.which == 13) {
+      var text1 = document.getElementsByClassName('trans')[0];
+      var text2 = document.getElementsByClassName('back trans')[0];
+      flip(1);
+      var url = document.getElementsByClassName('study_img')[0];
+      url.src = data[data_count][2];
+      text1.innerHTML = data[data_count][0];
+      setTimeout(function(){text2.innerHTML = data[data_count][1];data_count += 1;}, 500);
+    }
+});
 
 // Try to use native js to implement ajax calls - FIX
 
@@ -239,6 +281,7 @@ function send_data2(){
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "100%";
+    document.getElementsByClassName("closebtn")[0].style.visibility = "visible";
 }
 
 function closeNav() {

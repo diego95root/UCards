@@ -45,7 +45,7 @@ html_start = """
         </div>
     </div>
 
-    <span id="menu_toggle" onclick="openNav()">open</span>
+    <span id="menu_toggle" onclick="openNav()">&#9776</span>
     """
 
 html_end = """
