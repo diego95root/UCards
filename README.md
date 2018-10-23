@@ -1,9 +1,5 @@
 <h1 align="center">
-  <br>
-  <a href="https://github.com/diego95root/UCards"><img src="https://github.com/diego95root/UCards/Images/main.png" alt="UCards"></a>
-  <br>
-  Ucards
-  <br>
+  <img src="https://github.com/diego95root/UCards/Images/main.png" alt="UCards">
 </h1>
 
 ---
