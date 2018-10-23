@@ -1,6 +1,18 @@
-## Flashcards project
+<h1 align="center">
+  <br>
+  <a href="https://github.com/diego95root/UCards"><img src="https://github.com/diego95root/UCards/Images/main.png" alt="UCards"></a>
+  <br>
+  Ucards
+  <br>
+</h1>
 
 ---
+
+<h1 align="center">
+  <br>
+  Ucards
+  <br>
+</h1>
 
 This is a web app which serves as a flashcards tool to learn new languages. It is highly customisable and really easy to use. Besides, portability comes in handy, as people will be able to share wordlists and learn from them.
 
