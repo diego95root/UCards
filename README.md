@@ -1,8 +1,6 @@
 <h1 align="center">
-  <img src="https://github.com/diego95root/UCards/blob/master/Images/main.png" alt="UCards">
+  <img src="https://github.com/diego95root/UCards/blob/master/Images/main.png" alt="UCards" style="max-width:350px">
 </h1>
-
----
 
 <h1 align="center">
   <br>
