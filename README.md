@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://github.com/diego95root/UCards/blob/master/Images/main.png" alt="UCards" style="max-width:350px">
+  <img src="https://github.com/diego95root/UCards/blob/master/Images/main.png" alt="UCards" width="200" height="40">
 </h1>
 
 <h1 align="center">
