@@ -3,7 +3,6 @@
 </h1>
 
 <h1 align="center">
-  <br>
   Ucards
   <br>
 </h1>
