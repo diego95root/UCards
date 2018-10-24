@@ -1,7 +1,6 @@
 <h1 align="center">
   <img src="https://github.com/diego95root/UCards/blob/master/Images/main.png" alt="UCards" width="65%">
   <br>
-  Ucards
 </h1>
 
 This is a web app which serves as a flashcards tool to learn new languages. It is highly customisable and really easy to use. Besides, portability comes in handy, as people will be able to share wordlists and learn from them.
