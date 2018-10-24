@@ -1,8 +1,6 @@
 <h1 align="center">
   <img src="https://github.com/diego95root/UCards/blob/master/Images/main.png" alt="UCards" width="65%">
-</h1>
-
-<h1 align="center">
+  <br>
   Ucards
 </h1>
 
